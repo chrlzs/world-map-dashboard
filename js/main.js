@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.style.top = "0";
     canvas.style.left = "0";
     canvas.style.pointerEvents = "none";
+    canvas.style.zIndex = "1000"; // Ensure the canvas is on top
     document.getElementById('map').appendChild(canvas);
     
     function drawPixelGrid() {
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.clearRect(0, 0, width, height);
             drawPixelGrid();
             
-            ctx.fillStyle = 'green';
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // Semi-transparent green
             for (let y = 0; y < height; y += pixelSize) {
                 ctx.fillRect(column * pixelSize, y, pixelSize, pixelSize);
             }
