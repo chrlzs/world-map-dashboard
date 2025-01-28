@@ -40,6 +40,65 @@
     --control-border-color: #00bcd4;
 }
 
+[data-theme="crt"] {
+    /* CRT Monochrome theme */
+    --background-color: #000000; /* Black background */
+    --foreground-color: #00ff00; /* Bright green text */
+    --map-background: #001000; /* Dark green background for the map */
+    --pixel-background: #001000; /* Dark green for pixels */
+    --pixel-hover-color: #00ff00; /* Bright green for hover */
+    --popup-background: #001000; /* Dark green for popups */
+    --popup-text-color: #00ff00; /* Bright green for popup text */
+    --control-background: #001000; /* Dark green for controls */
+    --control-text-color: #00ff00; /* Bright green for control text */
+    --control-border-color: #00ff00; /* Bright green for borders */
+}
+
+/* Add scan lines effect for CRT theme */
+[data-theme="crt"] #map::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(0, 255, 0, 0.1) 50%,
+        transparent 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 300;
+    animation: scan 2s linear infinite;
+}
+
+/* Add a subtle glow effect for CRT theme */
+[data-theme="crt"] #map::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 255, 0, 0.1) 0%,
+        rgba(0, 255, 0, 0) 70%
+    );
+    pointer-events: none;
+    z-index: 300;
+}
+
+/* Scan line animation */
+@keyframes scan {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
 html, body {
     height: 100%;
     margin: 0;

@@ -8,16 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
         <button onclick="switchTheme('dracula')">Dracula</button>
         <button onclick="switchTheme('light')">Light</button>
         <button onclick="switchTheme('ocean')">Ocean</button>
+        <button onclick="switchTheme('crt')">CRT</button>
     `;
     document.body.appendChild(themeSwitcher);
 
     function switchTheme(theme) {
-        alert('switching theme');
         document.documentElement.setAttribute('data-theme', theme);
     }
 
     // Initialize with the default theme
-    switchTheme('dracula');
+    switchTheme('crt');
 
     const map = L.map('map').setView([0, 0], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
