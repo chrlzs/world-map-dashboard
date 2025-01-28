@@ -55,7 +55,6 @@
 
 [data-theme="crt"] body {
     font-family: "VT323", monospace;
-    color: yellow;
 }
 [data-theme="crt"] #map::before {
     content: "";
