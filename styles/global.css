@@ -214,3 +214,64 @@ html, body {
 .leaflet-control a:hover {
     background-color: var(--control-border-color);
 }
+
+/* Add a radar sweep line */
+.radar-sweep {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(0, 255, 0, 0), rgba(0, 255, 0, 1));
+    transform-origin: top center;
+    animation: sweep 4s linear infinite;
+    z-index: 1600;
+}
+
+@keyframes sweep {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Add radar pulses */
+.radar-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(0, 255, 0, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: pulse 3s infinite;
+    z-index: 1500;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* Add a radar grid */
+.radar-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 50%, rgba(0, 255, 0, 0.1) 100%);
+    background-size: 200px 200px;
+    z-index: 3400;
+    pointer-events: none;
+}

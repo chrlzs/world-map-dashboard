@@ -99,6 +99,20 @@ document.addEventListener("DOMContentLoaded", function () {
     animateRadarEffect();
 });
 
+function createBlip() {
+    const blip = document.createElement('div');
+    blip.className = 'radar-blip';
+    blip.style.top = `${Math.random() * 100}%`;
+    blip.style.left = `${Math.random() * 100}%`;
+    document.getElementById('radar').appendChild(blip);
+
+    // Remove blip after animation ends
+    setTimeout(() => blip.remove(), 2000);
+}
+
+// Generate blips every second
+setInterval(createBlip, 1000);
+
 window.switchTheme = function(theme) {
     document.documentElement.setAttribute('data-theme', theme);
 };
