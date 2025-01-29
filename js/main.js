@@ -19,8 +19,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize with the default theme
   switchTheme("crt");
 
+  const mapContainer = document.getElementById("map");
+  mapContainer.style.width = "100vw";
+  mapContainer.style.height = "100vh";
+
   //const map = L.map("map").setView([0, 0], 2);
-  const map = L.map("map", { zoomControl: false }).fitWorld();
+  //const map = L.map("map", { zoomControl: false }).fitWorld();
+  const map = L.map("map", { zoomControl: false });
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors!",
@@ -108,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch("data/countries.geojson")
     .then((response) => response.json())
     .then((data) => {
-        const geoJsonLayer = L.geoJSON(data, {
+      const geoJsonLayer = L.geoJSON(data, {
         style: function (feature) {
           return {
             color: "black",
@@ -142,8 +147,15 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         },
       }).addTo(map);
-      // Fit map to GeoJSON layer
-      map.fitBounds(geoJsonLayer.getBounds());
+      // Dynamically fit the map to the world while avoiding empty borders
+      const bounds = geoJsonLayer.getBounds();
+      const paddingOptions = {
+        paddingTopLeft: [0, 50], // Adjust padding to avoid top/bottom borders
+        paddingBottomRight: [0, 50],
+        maxZoom: 6, // Set max zoom level to avoid excessive zoom-out
+      };
+
+      map.fitBounds(bounds, paddingOptions);
     })
     .catch((error) => console.error("Error loading GeoJSON:", error));
 
