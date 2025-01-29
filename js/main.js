@@ -32,6 +32,37 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.style.pointerEvents = "none";
     canvas.style.zIndex = "1000"; // Ensure the canvas is on top
     document.getElementById('map').appendChild(canvas);
+
+    const windows = document.querySelectorAll('.window');
+
+    windows.forEach(window => {
+        const header = window.querySelector('.window-header');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        header.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - window.offsetLeft;
+            offsetY = e.clientY - window.offsetTop;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                window.style.left = `${e.clientX - offsetX}px`;
+                window.style.top = `${e.clientY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Close button functionality
+        const closeBtn = window.querySelector('.close-btn');
+        closeBtn.addEventListener('click', () => {
+            window.style.display = 'none';
+        });
+    });
     
     function drawPixelGrid() {
         const ctx = canvas.getContext('2d');
@@ -88,6 +119,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 onEachFeature: function (feature, layer) {
                     if (feature.properties && feature.properties.ADMIN) {
                         layer.bindPopup(feature.properties.ADMIN, { closeOnClick: false, autoClose: false });
+
+                        layer.on('click', () => {
+                            const countryName = feature.properties.ADMIN;
+                            const countryData = {
+                                population: 'N/A',
+                                capital: 'N/A',
+                                region: 'N/A'
+                            };
+
+                            // Update the country info window
+                            updateCountryInfo(countryName, countryData);
+
+                            // Add a log entry
+                            addLogEntry(`Country selected: ${countryName}`);
+                        });
                     }
                 }
             }).addTo(map);
@@ -116,3 +162,39 @@ setInterval(createBlip, 1000);
 window.switchTheme = function(theme) {
     document.documentElement.setAttribute('data-theme', theme);
 };
+
+function updateCountryInfo(countryName, countryData) {
+    const countryInfoWindow = document.getElementById('country-info-window');
+    const content = countryInfoWindow.querySelector('.window-content');
+
+    content.innerHTML = `
+        <h3>${countryName}</h3>
+        <p>Population: ${countryData.population}</p>
+        <p>Capital: ${countryData.capital}</p>
+        <p>Region: ${countryData.region}</p>
+    `;
+
+    // Show the window if it's hidden
+    countryInfoWindow.style.display = 'block';
+}
+
+// Example usage
+updateCountryInfo('Germany', {
+    population: '83 million',
+    capital: 'Berlin',
+    region: 'Europe'
+});
+
+function addLogEntry(message) {
+    const logsList = document.getElementById('logs-list');
+    const logEntry = document.createElement('li');
+    logEntry.textContent = message;
+    logsList.appendChild(logEntry);
+
+    // Auto-scroll to the latest log
+    logsList.scrollTop = logsList.scrollHeight;
+}
+
+// Example usage
+addLogEntry('Country selected: Germany');
+addLogEntry('Country selected: France');
