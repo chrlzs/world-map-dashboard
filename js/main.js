@@ -219,14 +219,16 @@ updateCountryInfo("Germany", {
   region: "Europe",
 });
 
-function addLogEntry(message) {
-  const logsList = document.getElementById("logs-list");
-  const logEntry = document.createElement("li");
-  logEntry.textContent = message;
-  logsList.appendChild(logEntry);
+async function addLogEntry(message) {
+    // Simulate an asynchronous operation (e.g., fetching data or writing to a server)
+    await new Promise(resolve => setTimeout(resolve, 100)); // Simulate a delay
+    const logsList = document.getElementById('logs-list');
+    const logEntry = document.createElement('li');
+    logEntry.textContent = message;
+    logsList.appendChild(logEntry);
 
-  // Auto-scroll to the latest log
-  logsList.scrollTop = logsList.scrollHeight;
+    // Auto-scroll to the latest log
+    logsList.scrollTop = logsList.scrollHeight;
 }
 
 // Example usage

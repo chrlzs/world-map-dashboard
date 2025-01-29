@@ -5,7 +5,7 @@
     --map-background: #44475a;
     --pixel-background: #44475a;
     --pixel-hover-color: #bd93f9;
-    --popup-background: #44475a;
+    --popup-background: rgba(68, 71, 90, 0.9); /* Slightly transparent */
     --popup-text-color: #f8f8f2;
     --control-background: #44475a;
     --control-text-color: #f8f8f2;
@@ -19,7 +19,7 @@
     --map-background: #f0f0f0;
     --pixel-background: #f0f0f0;
     --pixel-hover-color: #50fa7b; /* Dracula green for contrast */
-    --popup-background: #ffffff;
+    --popup-background: rgba(255, 255, 255, 0.9); /* Slightly transparent */
     --popup-text-color: #000000;
     --control-background: #ffffff;
     --control-text-color: #000000;
@@ -33,7 +33,7 @@
     --map-background: #16213e;
     --pixel-background: #16213e;
     --pixel-hover-color: #00bcd4; /* Cyan for hover */
-    --popup-background: #16213e;
+    --popup-background: rgba(22, 33, 62, 0.9); /* Slightly transparent */
     --popup-text-color: #e0e0e0;
     --control-background: #16213e;
     --control-text-color: #e0e0e0;
@@ -41,12 +41,13 @@
 }
 
 [data-theme="crt"] {
+    /* CRT Monochrome theme */
     --background-color: #000000;
     --foreground-color: #00ff00;
     --map-background: #001000;
     --pixel-background: #001000;
-    --pixel-hover-color: #00ff00;
-    --popup-background: #001000;
+    --pixel-hover-color: #00ff00; /* Bright green for hover */
+    --popup-background: rgba(0, 16, 0, 0.9); /* Slightly transparent */
     --popup-text-color: #00ff00;
     --control-background: #001000;
     --control-text-color: #00ff00;
