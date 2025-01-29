@@ -347,6 +347,7 @@ html, body {
     color: var(--popup-text-color);
     overflow-y: auto;
     height: calc(100% - 40px); /* Adjust for header height */
+    scrollbar-color: var(--control-text-color) var(--control-background);
 }
 
 /* Logs List */
