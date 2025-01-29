@@ -42,10 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const windows = document.querySelectorAll(".window");
 
-  windows.forEach((window) => {
+  const windowSpacing = 30; // Adjust spacing between windows
+  let startX = 50; // Initial X position
+  let startY = 50; // Initial Y position
+
+
+  windows.forEach((window, index) => {
     const header = window.querySelector(".window-header");
     let isDragging = false;
     let offsetX, offsetY;
+    window.style.left = `${startX + (index * windowSpacing * 2)}px`;
+    window.style.top = `${startY + (index * windowSpacing)}px`;
 
     header.addEventListener("mousedown", (e) => {
       isDragging = true;
@@ -69,7 +76,15 @@ document.addEventListener("DOMContentLoaded", function () {
     closeBtn.addEventListener("click", () => {
       window.style.display = "none";
     });
-  });
+    // Ensure windows stay within viewport bounds
+    const rect = window.getBoundingClientRect();
+    if (rect.right > window.innerWidth) {
+      window.style.left = `${window.innerWidth - rect.width - 20}px`;
+    }
+    if (rect.bottom > window.innerHeight) {
+      window.style.top = `${window.innerHeight - rect.height - 20}px`;
+    }  
+});
 
   function drawPixelGrid() {
     const ctx = canvas.getContext("2d");
