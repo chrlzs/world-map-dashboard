@@ -137,10 +137,10 @@ html, body {
 }
 
 #map {
-    height: 100%;
-    width: 100%;
-    position: relative;
-    background-color: var(--map-background);
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    margin: 0;
+    padding: 0;
 }
 
 #pixel-grid {
