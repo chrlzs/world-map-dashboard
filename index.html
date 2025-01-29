@@ -42,10 +42,13 @@
                 <button class="close-btn">&times;</button>
             </div>
             <div class="window-content">
-                <ul id="logs-list">
-                    <li>Log entry 1</li>
-                    <li>Log entry 2</li>
-                </ul>
+                <div class="log-filters">
+                    <button onclick="filterLogs('all')">All</button>
+                    <button onclick="filterLogs('info')">Info</button>
+                    <button onclick="filterLogs('warning')">Warnings</button>
+                    <button onclick="filterLogs('error')">Errors</button>
+                </div>
+                <ul id="logs-list"></ul>
             </div>
         </div>
     </div>

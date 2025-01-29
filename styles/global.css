@@ -361,3 +361,46 @@ html, body {
     padding: 5px 0;
     border-bottom: 1px solid var(--control-border-color);
 }
+
+/* Log Filters */
+.log-filters {
+    margin-bottom: 10px;
+}
+
+.log-filters button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: var(--control-background);
+    border: 1px solid var(--control-border-color);
+    color: var(--control-text-color);
+    cursor: pointer;
+}
+
+.log-filters button:hover {
+    background-color: var(--pixel-hover-color);
+}
+
+/* Log Entries */
+#logs-list li {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--control-border-color);
+}
+
+/* Log Type Styles */
+#logs-list li.log-info {
+    color: var(--control-text-color); /* Default color for info logs */
+}
+
+#logs-list li.log-warning {
+    color: orange; /* Color for warning logs */
+}
+
+#logs-list li.log-error {
+    color: red; /* Color for error logs */
+}
+
+#logs-list li .timestamp {
+    color: gray; /* Style for timestamps */
+    font-size: 0.9em;
+    margin-right: 10px;
+}

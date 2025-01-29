@@ -219,18 +219,36 @@ updateCountryInfo("Germany", {
   region: "Europe",
 });
 
-async function addLogEntry(message) {
-    // Simulate an asynchronous operation (e.g., fetching data or writing to a server)
-    await new Promise(resolve => setTimeout(resolve, 100)); // Simulate a delay
+function addLogEntry(message, type = 'info') {
+    const timestamp = new Date().toLocaleTimeString(); // Get current time
     const logsList = document.getElementById('logs-list');
     const logEntry = document.createElement('li');
-    logEntry.textContent = message;
+
+    // Add a class for the log type (e.g., info, warning, error)
+    logEntry.classList.add(`log-${type}`);
+
+    // Include the timestamp and message in the log entry
+    logEntry.innerHTML = `<span class="timestamp">[${timestamp}]</span> ${message}`;
+
     logsList.appendChild(logEntry);
 
     // Auto-scroll to the latest log
     logsList.scrollTop = logsList.scrollHeight;
 }
 
+function filterLogs(type) {
+    const logs = document.querySelectorAll('#logs-list li');
+
+    logs.forEach(log => {
+        if (type === 'all' || log.classList.contains(`log-${type}`)) {
+            log.style.display = 'block'; // Show the log
+        } else {
+            log.style.display = 'none'; // Hide the log
+        }
+    });
+}
+
 // Example usage
-addLogEntry("Country selected: Germany");
-addLogEntry("Country selected: France");
+addLogEntry('Country selected: Germany', 'info');
+addLogEntry('Warning: Low disk space', 'warning');
+addLogEntry('Error: Failed to fetch data', 'error');
