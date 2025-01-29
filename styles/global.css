@@ -299,6 +299,16 @@ html, body {
     overflow: hidden;
     pointer-events: all; /* Enable interactions within the window */
     resize: both; /* Allow resizing */
+    opacity: 0.6; /* Add transparency */
+    transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.window:hover {
+    opacity: 1; /* Make the window fully opaque on hover */
+}
+
+.window-header, .window-content {
+    opacity: 1; /* Ensure the content inside the window is fully opaque */
 }
 
 /* Window Header */
