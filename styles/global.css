@@ -467,3 +467,16 @@ body.multi-select-mode::after {
   border-radius: 3px;
   z-index: 1000;
 }
+
+#radar {
+    pointer-events: none; /* Make the radar container pass through pointer events */
+}
+
+.radar-sweep,
+.radar-pulse,
+.radar-grid,
+.radar-blip,
+.radar-glow,
+.radar-noise {
+    pointer-events: none; /* Make all radar elements pass through pointer events */
+}
