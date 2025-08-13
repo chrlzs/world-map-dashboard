@@ -74,16 +74,6 @@ Once the project is running, you can interact with the map by hovering over coun
 - **Country Data**: GeoJSON files are used to store country boundary data and are rendered via Leaflet.js.
 - **Visual Effects**: The project includes hover and click effects, which can be adjusted in `map.js`.
 
-## Contributing
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -m 'Add a new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Open a pull request
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
