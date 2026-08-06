@@ -70,9 +70,9 @@ Once the project is running, you can interact with the map by hovering over coun
 
 ### Customization
 
-- **Grid and Map Layers**: The world grid and country boundaries are defined in `world-map/public/js/core/grid.js` and `globe.js`. To customize the grid, modify the `Grid.js` file.
-- **Country Data**: GeoJSON files are used to store country boundary data and are rendered via Leaflet.js.
-- **Visual Effects**: The project includes hover and click effects, which can be adjusted in `map.js`.
+- **Grid and Map Layers**: The world grid and country boundaries are managed in [`js/main.js`](file:///home/charlie/source/world-map-dashboard/js/main.js).
+- **Country Data**: Boundary data is stored in [`data/countries.geojson`](file:///home/charlie/source/world-map-dashboard/data/countries.geojson) and metadata in [`data/country-data.js`](file:///home/charlie/source/world-map-dashboard/data/country-data.js).
+- **Visual Effects & Styling**: Radar effects, CRT scanlines, theme variables, and window styles can be adjusted in [`styles/global.css`](file:///home/charlie/source/world-map-dashboard/styles/global.css).
 
 ## License
 

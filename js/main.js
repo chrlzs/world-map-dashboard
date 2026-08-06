@@ -106,43 +106,57 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  const offscreenGridCanvas = document.createElement("canvas");
+
   function drawPixelGrid() {
-    const ctx = canvas.getContext("2d");
-    canvas.width = map.getSize().x;
-    canvas.height = map.getSize().y;
+    const width = map.getSize().x;
+    const height = map.getSize().y;
+    canvas.width = width;
+    canvas.height = height;
+    offscreenGridCanvas.width = width;
+    offscreenGridCanvas.height = height;
 
+    const offCtx = offscreenGridCanvas.getContext("2d");
     const pixelSize = 10;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(0, 0, 255, 0.3)";
+    offCtx.clearRect(0, 0, width, height);
+    offCtx.fillStyle = "rgba(0, 0, 255, 0.3)";
 
-    for (let x = 0; x < canvas.width; x += pixelSize) {
-      for (let y = 0; y < canvas.height; y += pixelSize) {
-        ctx.fillRect(x, y, pixelSize, pixelSize);
+    for (let x = 0; x < width; x += pixelSize) {
+      for (let y = 0; y < height; y += pixelSize) {
+        offCtx.fillRect(x, y, pixelSize, pixelSize);
       }
     }
+
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(offscreenGridCanvas, 0, 0);
   }
 
   function animateRadarEffect() {
     const ctx = canvas.getContext("2d");
     const pixelSize = 10;
-    const width = canvas.width;
-    const height = canvas.height;
-    const totalColumns = Math.ceil(width / pixelSize);
+    let column = 0;
 
-    function animateColumn(column) {
+    function renderFrame() {
+      const width = canvas.width;
+      const height = canvas.height;
+      if (width === 0 || height === 0) return;
+
+      const totalColumns = Math.ceil(width / pixelSize);
       ctx.clearRect(0, 0, width, height);
-      drawPixelGrid();
+      ctx.drawImage(offscreenGridCanvas, 0, 0);
 
       ctx.fillStyle = "rgba(0, 255, 0, 0.5)"; // Semi-transparent green
+      const colX = column * pixelSize;
       for (let y = 0; y < height; y += pixelSize) {
-        ctx.fillRect(column * pixelSize, y, pixelSize, pixelSize);
+        ctx.fillRect(colX, y, pixelSize, pixelSize);
       }
 
       column = (column + 1) % totalColumns;
-      requestAnimationFrame(() => animateColumn(column));
+      requestAnimationFrame(renderFrame);
     }
 
-    animateColumn(0);
+    renderFrame();
   }
 
   // === Geographic Grid Overlay ===
@@ -444,6 +458,10 @@ function filterLogs(type) {
     }
   });
 }
+
+// Expose functions globally for inline HTML event handlers
+window.filterLogs = filterLogs;
+window.addLogEntry = addLogEntry;
 
 // Example usage
 addLogEntry('Country selected: Germany', 'info');
